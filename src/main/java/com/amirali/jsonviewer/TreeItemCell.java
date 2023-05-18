@@ -29,22 +29,14 @@ public class TreeItemCell extends TreeCell<Map<String, Object>> {
         }else {
             if (root == null)
                 createContent();
-            switch (map.get("key").toString()) {
-                case "EMPTY_KEY" -> {
-                    keyLabel.setText("- : ");
-                    valueTextField.setVisible(true);
-                    valueTextField.setText(map.get("value").toString());
-                }
-                case "NO_KEY" -> {
-                    keyLabel.setText(map.get("value").toString());
-                    valueTextField.setVisible(false);
-                }
 
-                default -> {
-                    keyLabel.setText(map.get("key") + " : ");
-                    valueTextField.setVisible(true);
-                    valueTextField.setText(map.get("value").toString());
-                }
+            if (map.get("key").toString().equals("NO_KEY")) {
+                keyLabel.setText(map.get("value").toString());
+                valueTextField.setVisible(false);
+            } else {
+                keyLabel.setText(map.get("key") + " : ");
+                valueTextField.setVisible(true);
+                valueTextField.setText(map.get("value").toString());
             }
 
             setGraphic(root);
@@ -89,21 +81,21 @@ public class TreeItemCell extends TreeCell<Map<String, Object>> {
                 var jsonArray = ((JSONArray) item.get("json_array"));
 
                 if (newValue.equalsIgnoreCase("true") || newValue.equalsIgnoreCase("false"))
-                    jsonArray.put(Integer.parseInt(item.get("field_index").toString()), newValue.equalsIgnoreCase("true"));
+                    jsonArray.put(Integer.parseInt(item.get("key").toString()), newValue.equalsIgnoreCase("true"));
                 else {
                     try {
-                        jsonArray.put(Integer.parseInt(item.get("field_index").toString()), Integer.parseInt(newValue));
+                        jsonArray.put(Integer.parseInt(item.get("key").toString()), Integer.parseInt(newValue));
                     }catch (NumberFormatException e1) {
                         try {
-                            jsonArray.put(Integer.parseInt(item.get("field_index").toString()), Long.parseLong(newValue));
+                            jsonArray.put(Integer.parseInt(item.get("key").toString()), Long.parseLong(newValue));
                         }catch (NumberFormatException e2) {
                             try {
-                                jsonArray.put(Integer.parseInt(item.get("field_index").toString()), Float.parseFloat(newValue));
+                                jsonArray.put(Integer.parseInt(item.get("key").toString()), Float.parseFloat(newValue));
                             }catch (NumberFormatException e3) {
                                 try {
-                                    jsonArray.put(Integer.parseInt(item.get("field_index").toString()), Double.parseDouble(newValue));
+                                    jsonArray.put(Integer.parseInt(item.get("key").toString()), Double.parseDouble(newValue));
                                 }catch (NumberFormatException e4) {
-                                    jsonArray.put(Integer.parseInt(item.get("field_index").toString()), newValue);
+                                    jsonArray.put(Integer.parseInt(item.get("key").toString()), newValue);
                                 }
                             }
                         }

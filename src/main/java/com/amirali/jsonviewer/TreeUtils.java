@@ -91,15 +91,14 @@ public final class TreeUtils {
         for (int i = 0; i < jsonArray.length(); i++) {
             var object = jsonArray.get(i);
             if (object instanceof JSONObject jsonObject1) {
-                var objectTree = createObject(jsonObject1, "");
+                var objectTree = createObject(jsonObject1, String.valueOf(i));
                 treeArray.getChildren().add(objectTree);
             }else {
                 var field = new HashMap<String, Object>();
-                field.put("key", "EMPTY_KEY");
+                field.put("key", String.valueOf(i));
                 field.put("value", object);
                 field.put("type", Type.ARRAY_FIELD);
                 field.put("json_array", jsonArray);
-                field.put("field_index", i);
 
                 treeArray.getChildren().add(new TreeItem<>(field));
             }
