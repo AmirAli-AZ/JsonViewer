@@ -24,6 +24,7 @@ public class TreeItemCell extends TreeCell<Map<String, Object>> {
         super.updateItem(map, b);
 
         setText(null);
+        getDisclosureNode().lookup(".arrow").setStyle("-fx-shape: \"M342 806q-13-15-13.5-34t13.5-33l164-164-165-165q-13-13-12.5-33.5T342 343q15-15 33.5-14.5T408 343l199 199q7 7 10.5 15.5T621 575q0 9-3.5 17.5T607 608L409 806q-14 14-33 13.5T342 806Z\"");
         if (map == null || b) {
             setGraphic(null);
         }else {

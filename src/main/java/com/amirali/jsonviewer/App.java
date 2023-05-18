@@ -30,6 +30,7 @@ public class App extends Application {
         var root = new BorderPane();
 
         var treeView = new TreeView<Map<String, Object>>();
+        treeView.setShowRoot(false);
         treeView.setCellFactory(jsonItemTreeView -> new TreeItemCell());
 
         var fileMenu = new Menu("File");
